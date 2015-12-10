@@ -96,7 +96,7 @@ namespace Bitrix24{
     protected function unserializeToken(){
       if(!file_exists(BS_CORE_PATH."../storage/token"))return false;
       $this->data=unserialize(file_get_contents(BS_CORE_PATH."../storage/token"));
-      if($this->data===false)return false;
+      return ($this->data!==false);
     }
     protected function getMethods(){
       $url="https://".$this->data["domain"]."/rest/methods.json?auth=".$this->data["access_token"]."&full=true";
