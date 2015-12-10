@@ -1,5 +1,6 @@
 <?php
 namespace Bitrix24{
+  use \Core\Logger as logger;
   class Bitrix24{
     protected $options=[
       "timeout"=>"24",
@@ -80,12 +81,7 @@ namespace Bitrix24{
       return false;
     }
     protected function refreshToken(){
-      $url="https://".$this->data["domain"]."/oauth/token/?grant_type=refresh_token"
-          ."&client_id=".$this->data["client_id"]
-          ."&refresh_token=".$this->data["refresh_token"]
-          ."&client_secret=".$this->data["secret"]
-          ."&redirect_uri=".urldecode($this->data["redirect_uri"])
-          ."&scope=user";
+      $url="https://".$this->data["domain"]."/rest/methods.json?auth=".$this->data["access_token"]."&full=tru";
       $this->Send(["url"=>$url]);
       $this->setToken($this->ResponseAsJson());
     }
@@ -97,6 +93,16 @@ namespace Bitrix24{
       $this->data=unserialize(file_get_contents(BS_CORE_PATH."../storage/token"));
       return ($this->data!==false);
     }
+    protected function getMethods(){
+      $url="https://".$this->data["domain"]."/oauth/token/?grant_type=refresh_token"
+          ."&client_id=".$this->data["client_id"]
+          ."&refresh_token=".$this->data["refresh_token"]
+          ."&client_secret=".$this->data["secret"]
+          ."&redirect_uri=".urldecode($this->data["redirect_uri"])
+          ."&scope=user";
+      $this->Send(["url"=>$url]);
+      logger::info($this->response);
+    }
     public function __construct(){
       $this->cookie=new \Http\Cookie;
       $this->cookie->BITRIX_SM_CC="Y";
@@ -107,6 +113,7 @@ namespace Bitrix24{
       if(!$this->unserializeToken()){
         if(!$this->getToken())$this->oauthGetcode();
       }
+      $this->getMethods();
     }
     public function Send($params=[]){
       $s=$this->initCurl($params["url"]);
@@ -116,7 +123,6 @@ namespace Bitrix24{
       }
       $status = curl_getinfo($s,CURLINFO_HTTP_CODE);
       $last_url = parse_url(curl_getinfo($s, CURLINFO_EFFECTIVE_URL));
-      //print_r($last_url);
       $err = curl_error($s);
       curl_close($s);
     }
