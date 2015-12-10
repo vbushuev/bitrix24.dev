@@ -1,0 +1,41 @@
+<?php
+ob_start();
+include("../config.php");
+$bitrix24=[
+  "domain"=>"oookbrenessans.bitrix24.ru",
+  "client_id"=>"local.565ec55fb6b3c3.75244299",
+  "secret"=>"235f154afe7a8666ae10221e2a7a7d73",
+  "title"=>"FormUpload",
+  "code"=>"7uiokgepj220116exosxtpwzi5nes7mk",
+  "member_id"=>"d428a6b5c94fac2b9b84c3c53e984083",
+  "redirect_uri"=>"http://bitrix24.bs/test"
+  //"redirect_uri"=>"https://apps-b1594903.bitrix24-cdn.com/b1594903/app_local/89b8a6f083261d3350638a57cbc010a6/src/oauth.php"
+];
+if(isset($_GET["code"])){
+    $bitrix24["code"]=$_GET["code"];
+    $bitrix24["member_id"]=isset($_GET["member_id"])?$_GET["member_id"]:"";
+    $url="https://".$bitrix24["domain"]."/oauth/token/?"
+        ."client_id=".$bitrix24["client_id"]
+        ."&grant_type=authorization_code"
+        ."&code=".$bitrix24["code"]
+        ."&client_secret=".$bitrix24["secret"]
+        ."&redirect_uri=".urldecode($bitrix24["redirect_uri"])
+        ."&scope=user"
+    ;
+    $t=new Bitrix24\Bitrix24();
+    $t->Send(["uri"=>$url]);
+    $js=$t->ResponseAsJson();
+    $bitrix24["token"]=$js;
+    $out=ob_get_clean();
+    file_put_contents(CORE_PATH."../logs/out-".date("Y-m-d").".log",$out."\n",FILE_APPEND);
+}
+else{
+  $out=ob_get_clean();
+  file_put_contents(CORE_PATH."../logs/out-".date("Y-m-d").".log",$out."\n",FILE_APPEND);
+  $url="https://".$bitrix24["domain"]."/oauth/authorize/?client_id="
+      .$bitrix24["client_id"]
+      ."&response_type=code&redirect_uri="
+      .urldecode($bitrix24["redirect_uri"]);
+  header("Location: {$url}");
+}
+?>
