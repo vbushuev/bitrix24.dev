@@ -81,7 +81,12 @@ namespace Bitrix24{
       return false;
     }
     protected function refreshToken(){
-      $url="https://".$this->data["domain"]."/rest/methods.json?auth=".$this->data["access_token"]."&full=tru";
+      $url="https://".$this->data["domain"]."/oauth/token/?grant_type=refresh_token"
+          ."&client_id=".$this->data["client_id"]
+          ."&refresh_token=".$this->data["refresh_token"]
+          ."&client_secret=".$this->data["secret"]
+          ."&redirect_uri=".urldecode($this->data["redirect_uri"])
+          ."&scope=user";
       $this->Send(["url"=>$url]);
       $this->setToken($this->ResponseAsJson());
     }
@@ -91,17 +96,12 @@ namespace Bitrix24{
     protected function unserializeToken(){
       if(!file_exists(BS_CORE_PATH."../storage/token"))return false;
       $this->data=unserialize(file_get_contents(BS_CORE_PATH."../storage/token"));
-      return ($this->data!==false);
+      if($this->data===false)return false;
     }
     protected function getMethods(){
-      $url="https://".$this->data["domain"]."/oauth/token/?grant_type=refresh_token"
-          ."&client_id=".$this->data["client_id"]
-          ."&refresh_token=".$this->data["refresh_token"]
-          ."&client_secret=".$this->data["secret"]
-          ."&redirect_uri=".urldecode($this->data["redirect_uri"])
-          ."&scope=user";
+      $url="https://".$this->data["domain"]."/rest/methods.json?auth=".$this->data["access_token"]."&full=true";
       $this->Send(["url"=>$url]);
-      logger::info($this->response);
+      //logger::info($this->response);
     }
     public function __construct(){
       $this->cookie=new \Http\Cookie;
@@ -113,11 +113,15 @@ namespace Bitrix24{
       if(!$this->unserializeToken()){
         if(!$this->getToken())$this->oauthGetcode();
       }
+      logger::info(time().">".$this->data["expires_in"]."?=".((time()>$this->data["expires_in"])?"true":"false"));
+      //if(time()>$this->data["expires_in"])$this->refreshToken();
       $this->getMethods();
     }
     public function Send($params=[]){
       $s=$this->initCurl($params["url"]);
+      logger::info("Connect to: ".$params["url"]);
       $this->response=curl_exec($s);
+      logger::info("Response: ".$this->response);
       if(curl_errno($s)==CURLE_COULDNT_CONNECT){
           throw new \Exception('Couldnt connect.');
       }

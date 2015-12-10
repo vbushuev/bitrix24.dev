@@ -1,4 +1,4 @@
-* Hostname in DNS cache was stale, zapped
+* Hostname 192.168.11.7 was found in DNS cache
 *   Trying 192.168.11.7...
 * Connected to 192.168.11.7 (192.168.11.7) port 8080 (#0)
 * Establish HTTP proxy tunnel to oookbrenessans.bitrix24.ru:443
@@ -10,7 +10,7 @@ Proxy-Connection: Keep-Alive
 
 < HTTP/1.1 407 Proxy Authentication Required ( Отказано в доступе.  )
 < Via: 1.1 FFTMGM
-< Proxy-Authenticate: NTLM TlRMTVNTUAACAAAAFAAUADgAAAAFgomiu3xv6T9/iH4AAAAAAAAAAKAAoABMAAAABgByFwAAAA9SAEUATgBFAFMAUwBCAEEATgBLAAIAFABSAEUATgBFAFMAUwBCAEEATgBLAAEADABGAEYAVABNAEcATQAEABoAcgBlAG4AZQBzAHMAYgBhAG4AawAuAHIAdQADACgARgBGAHQAbQBnAE0ALgByAGUAbgBlAHMAcwBiAGEAbgBrAC4AcgB1AAUAGgByAGUAbgBlAHMAcwBiAGEAbgBrAC4AcgB1AAcACADwPss+MDPRAQAAAAA=
+< Proxy-Authenticate: NTLM TlRMTVNTUAACAAAAFAAUADgAAAAFgomiYpcxzr+5vlMAAAAAAAAAAKAAoABMAAAABgByFwAAAA9SAEUATgBFAFMAUwBCAEEATgBLAAIAFABSAEUATgBFAFMAUwBCAEEATgBLAAEADABGAEYAVABNAEcATQAEABoAcgBlAG4AZQBzAHMAYgBhAG4AawAuAHIAdQADACgARgBGAHQAbQBnAE0ALgByAGUAbgBlAHMAcwBiAGEAbgBrAC4AcgB1AAUAGgByAGUAbgBlAHMAcwBiAGEAbgBrAC4AcgB1AAcACABpGaM0ODPRAQAAAAA=
 < Connection: Keep-Alive
 < Proxy-Connection: Keep-Alive
 < Pragma: no-cache
@@ -23,7 +23,7 @@ Proxy-Connection: Keep-Alive
 * Proxy auth using NTLM with user 'v.bushuev'
 > CONNECT oookbrenessans.bitrix24.ru:443 HTTP/1.1
 Host: oookbrenessans.bitrix24.ru:443
-Proxy-Authorization: NTLM TlRMTVNTUAADAAAAGAAYAH4AAAAoASgBlgAAAAAAAABYAAAAEgASAFgAAAAUABQAagAAAAAAAAC+AQAABYKIogYBsR0AAAAPIakaeu5BtKBP02JGk+nCM3YALgBiAHUAcwBoAHUAZQB2ADQAMAAzAEIAVQBTAEgAVQBFAFYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAd2p2T/eSNcyCpTwTE9oGSgEBAAAAAAAA8D7LPjAz0QFjM8u8zcOKdQAAAAACABQAUgBFAE4ARQBTAFMAQgBBAE4ASwABAAwARgBGAFQATQBHAE0ABAAaAHIAZQBuAGUAcwBzAGIAYQBuAGsALgByAHUAAwAoAEYARgB0AG0AZwBNAC4AcgBlAG4AZQBzAHMAYgBhAG4AawAuAHIAdQAFABoAcgBlAG4AZQBzAHMAYgBhAG4AawAuAHIAdQAHAAgA8D7LPjAz0QEGAAQAAgAAAAgAMAAwAAAAAAAAAAAAAAAAQAAAosMpHGWsE85Tnc9+xXFLZCmpIAnDTmFybsHgYnxYlfwKABAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAA=
+Proxy-Authorization: NTLM TlRMTVNTUAADAAAAGAAYAH4AAAAoASgBlgAAAAAAAABYAAAAEgASAFgAAAAUABQAagAAAAAAAAC+AQAABYKIogYBsR0AAAAPynexLQj/xgDIfwHMVzskynYALgBiAHUAcwBoAHUAZQB2ADQAMAAzAEIAVQBTAEgAVQBFAFYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAun8fs1Cu0wUzd2wXAtGXnAEBAAAAAAAAaRmjNDgz0QEcRHCg4I/Y/QAAAAACABQAUgBFAE4ARQBTAFMAQgBBAE4ASwABAAwARgBGAFQATQBHAE0ABAAaAHIAZQBuAGUAcwBzAGIAYQBuAGsALgByAHUAAwAoAEYARgB0AG0AZwBNAC4AcgBlAG4AZQBzAHMAYgBhAG4AawAuAHIAdQAFABoAcgBlAG4AZQBzAHMAYgBhAG4AawAuAHIAdQAHAAgAaRmjNDgz0QEGAAQAAgAAAAgAMAAwAAAAAAAAAAAAAAAAQAAATrEB0I1Mu5x7Q9e+WSDtcVkhOzfaRurjz/b+jvnyzfcKABAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAA=
 Proxy-Connection: Keep-Alive
 
 < HTTP/1.1 200 Connection established
@@ -42,7 +42,7 @@ Proxy-Connection: Keep-Alive
 * 	 subjectAltName: oookbrenessans.bitrix24.ru matched
 * 	 issuer: C=US; ST=Arizona; L=Scottsdale; O=GoDaddy.com, Inc.; OU=http://certs.godaddy.com/repository/; CN=Go Daddy Secure Certificate Authority - G2
 * 	 SSL certificate verify result: self signed certificate in certificate chain (19), continuing anyway.
-> GET /oauth/token/?grant_type=authorization_code&client_id=local.565ec55fb6b3c3.75244299&code=jcbor66m9lovl3qnfn5sz1s1wa1lezvm&client_secret=235f154afe7a8666ae10221e2a7a7d73&redirect_uri=http://bitrix24.bs/test&scope=user HTTP/1.1
+> GET /rest/methods.json?auth=nc7za6igf47adpizy2jn9v6vckjjrqrw&full=true HTTP/1.1
 Host: oookbrenessans.bitrix24.ru
 Content-type: text/xml;charset="utf-8"
 Accept: text/json
@@ -52,17 +52,22 @@ Cookie: BITRIX_SM_CC=Y;BITRIX_SM_PK=Y;BITRIX_SM_SOUND_LOGIN_PLAYED=Y;BITRIX_SM_T
 
 < HTTP/1.1 200 OK
 < Server: nginx/1.7.8
-< Date: Thu, 10 Dec 2015 09:50:47 GMT
-< Content-Type: application/json
+< Date: Thu, 10 Dec 2015 10:47:46 GMT
+< Content-Type: application/json; charset=utf-8
 < Transfer-Encoding: chunked
 < Connection: keep-alive
 < P3P: policyref="/bitrix/p3p.xml", CP="NON DSP COR CUR ADM DEV PSA PSD OUR UNR BUS UNI COM NAV INT DEM STA"
 < X-Powered-CMS: Bitrix Site Manager (1682f9867b9ef36eacf05e345db46f3c)
-< Set-Cookie: PHPSESSID=QKVSVaYudo7wJObYi41pdpk1dKIUklMU; path=/; secure; HttpOnly
+< Set-Cookie: PHPSESSID=2ViilKsMuLgA7xTFjVHZCkyKWg9HiEgI; path=/; secure; HttpOnly
 < Expires: Thu, 19 Nov 1981 08:52:00 GMT
+< Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
 < Pragma: no-cache
 < Set-Cookie: qmb=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/
-< Cache-Control: no-store
+< Set-Cookie: BITRIX_SM_SALE_UID=0; expires=Sun, 04-Dec-2016 10:47:46 GMT; Max-Age=31104000; path=/
+< Set-Cookie: BITRIX_SM_SALE_UID=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/
+< Set-Cookie: BITRIX_SM_CC=Y; expires=Sun, 04-Dec-2016 10:47:46 GMT; Max-Age=31104000; path=/
+< Set-Cookie: BITRIX_SM_NCC=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/
+< Set-Cookie: BITRIX_SM_PK=%2F28%2F380bb78c1f55105f184bd2c17cb349c2; path=/; httponly
 < Access-Control-Allow-Origin: *
 < Access-Control-Allow-Headers: origin, content-type, accept
 < X-Frame-Options: SAMEORIGIN
